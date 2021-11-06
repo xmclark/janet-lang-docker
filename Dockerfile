@@ -1,23 +1,22 @@
-FROM ubuntu:22.04
-WORKDIR /var/app
-RUN apt -q update && apt install -yq make gcc git curl && \
+FROM docker.io/alpine:3.11
+ARG JANET=1.12.2
+ARG USER=app
+ARG GROUP=app
+ARG GID=1000
+ARG UID=1000
+RUN apk add --no-cache build-base curl git && \
+addgroup -g $GID -S $GROUP && \
+adduser -u $UID -S $USER -G $GROUP && \
 cd /tmp && \
-git clone -q https://github.com/janet-lang/janet.git && \
+git clone -q --depth 1 --branch v$JANET https://github.com/janet-lang/janet.git && \
 cd janet && \
 make all test install && \
 rm -rf /tmp/janet && \
 chmod 777 /usr/local/lib/janet && \
-cd /tmp && \
-git clone -q --depth=1 https://github.com/janet-lang/jpm.git && \
-cd jpm && \
-janet -q bootstrap.janet && \
-cp ./jpm/jpm /usr/local/lib/jpm && \
-chmod 777 /usr/local/lib/jpm && \
-janet -v && jpm -v
-ARG GID=1000
-ARG UID=1000
-ARG USER=me
-RUN groupadd -g $GID $USER && useradd -g $GID -M -u $UID -d /var/app $USER && \
-chmod 777 /var/app
+janet -v && jpm -v && \
+# chown -R $USER:$GROUP /usr/local/lib/janet/joy && \
+mkdir -p /var/app && \
+chown -R $USER:$GROUP /var/app
+WORKDIR /var/app
 USER $USER
 CMD ["janet"]
