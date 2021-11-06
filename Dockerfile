@@ -11,11 +11,10 @@ cd /tmp && \
 git clone --depth=1 https://github.com/janet-lang/jpm.git && \
 cd jpm && \
 janet bootstrap.janet && \
-ls jpm && \
-# cp ./jpm /usr/local/lib/jpm && \
-# chmod 777 /usr/local/lib/jpm && \
-janet -v
-# jpm -v
+cp ./jpm/jpm /usr/local/lib/jpm && \
+chmod 777 /usr/local/lib/jpm && \
+ls /usr/local/lib && \
+janet -v && jpm -v
 ARG GID=1000
 ARG UID=1000
 ARG USER=me
