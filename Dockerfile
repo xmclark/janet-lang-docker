@@ -12,12 +12,12 @@ cd janet && \
 make all test install && \
 rm -rf /tmp/janet && \
 chmod 777 /usr/local/lib/janet && \
-#cd /tmp && \
-#git clone --depth=1 https://github.com/janet-lang/jpm.git && \
-#cd jpm && \
-#janet bootstrap.janet && \
-#cp ./jpm /usr/local/lib/jpm && \
-#chmod 777 /usr/local/lib/jpm && \
+cd /tmp && \
+git clone --depth=1 https://github.com/janet-lang/jpm.git && \
+cd jpm && \
+janet bootstrap.janet && \
+# cp ./jpm /usr/local/lib/jpm && \
+# chmod 777 /usr/local/lib/jpm && \
 janet -v && \
 # jpm -v && \
 groupadd -g $GID $USER && \
