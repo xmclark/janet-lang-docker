@@ -19,7 +19,7 @@ chmod 777 /usr/local/lib/janet && \
 #cp ./jpm /usr/local/lib/jpm && \
 #chmod 777 /usr/local/lib/jpm && \
 janet -v && \
-jpm -v && \
+# jpm -v && \
 groupadd -g $GID $USER && \
 useradd -g $GID -M -u $UID -d /var/app $USER && \
 chmod 777 /var/app
