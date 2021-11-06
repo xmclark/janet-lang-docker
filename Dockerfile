@@ -24,5 +24,5 @@ ARG GID=1000
 ARG UID=1000
 ARG USER=me
 USER $USER
-chmod 777 /var/app
+RUN chmod 777 /var/app
 CMD ["janet"]
