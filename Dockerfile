@@ -5,6 +5,8 @@ ARG UID=1000
 ARG USER=me
 # Application setup
 WORKDIR /var/app
+RUN groupadd -g $GID $USER && useradd -g $GID -M -u $UID -d /var/app $USER
+USER $USER
 RUN apt -q update && apt install -yq make gcc git curl && \
 cd /tmp && \
 git clone https://github.com/janet-lang/janet.git && \
@@ -20,8 +22,5 @@ janet bootstrap.janet && \
 # chmod 777 /usr/local/lib/jpm && \
 janet -v && \
 # jpm -v && \
-groupadd -g $GID $USER && \
-useradd -g $GID -M -u $UID -d /var/app $USER && \
 chmod 777 /var/app
-USER $USER
 CMD ["janet"]
