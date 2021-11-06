@@ -1,12 +1,9 @@
 FROM ubuntu:22.04
 # Set group and user IDs for docker user
-ARG GID=1000
-ARG UID=1000
-ARG USER=me
+
 # Application setup
 WORKDIR /var/app
 RUN groupadd -g $GID $USER && useradd -g $GID -M -u $UID -d /var/app $USER
-USER $USER
 RUN apt -q update && apt install -yq make gcc git curl && \
 cd /tmp && \
 git clone https://github.com/janet-lang/janet.git && \
@@ -18,9 +15,14 @@ cd /tmp && \
 git clone --depth=1 https://github.com/janet-lang/jpm.git && \
 cd jpm && \
 janet bootstrap.janet && \
+ls jpm && \
 # cp ./jpm /usr/local/lib/jpm && \
 # chmod 777 /usr/local/lib/jpm && \
 janet -v && \
 # jpm -v && \
+ARG GID=1000
+ARG UID=1000
+ARG USER=me
+USER $USER
 chmod 777 /var/app
 CMD ["janet"]
