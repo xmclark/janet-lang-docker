@@ -15,7 +15,7 @@ ls jpm && \
 # cp ./jpm /usr/local/lib/jpm && \
 # chmod 777 /usr/local/lib/jpm && \
 janet -v && \
-# jpm -v && \
+# jpm -v
 ARG GID=1000
 ARG UID=1000
 ARG USER=me
