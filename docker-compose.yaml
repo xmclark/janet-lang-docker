@@ -5,6 +5,6 @@ services:
       dockerfile: repl.Dockerfile
   server:
     build:
-      dockerfile: deploy.Dockerfile
+      dockerfile: Dockerfile
     ports:
       - "9001:9001"
