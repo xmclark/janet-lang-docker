@@ -14,7 +14,8 @@ make all test install && \
 rm -rf /tmp/janet && \
 chmod 777 /usr/local/lib/janet && \
 janet -v && jpm -v && \
-# chown -R $USER:$GROUP /usr/local/lib/janet/joy && \
+jpm install joy && \
+chown -R $USER:$GROUP /usr/local/lib/janet/joy && \
 mkdir -p /var/app && \
 chown -R $USER:$GROUP /var/app
 WORKDIR /var/app
